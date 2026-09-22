@@ -1,0 +1,126 @@
+---
+import { nav } from "../../data/nav";
+import { url } from "../../lib/url";
+import Nav from "./Nav.astro";
+import MobileNav from "./MobileNav.astro";
+---
+
+<header id="site-header" class="sticky top-0 z-50 bg-navy shadow-card">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 transition-[padding] duration-200 sm:px-6 lg:px-8" style={`padding-top: max(0.75rem, env(safe-area-inset-top, 0px)); padding-top: calc(env(safe-area-inset-top, 0px) + 0.75rem);`}>
+    <a href={url("/")} class="flex shrink-0 items-center gap-3 rounded-md py-1">
+      <img
+        src={url("/images/site/logo.png")}
+        alt="Villiers High School"
+        width="150"
+        height="40"
+        class="h-8 w-auto sm:h-9"
+      />
+      <span class="sr-only">Villiers High School — home</span>
+    </a>
+
+    <div class="hidden md:block">
+      <Nav items={nav} />
+    </div>
+
+    <div class="flex items-center gap-2 md:hidden">
+      <button
+        id="mobile-nav-toggle"
+        type="button"
+        class="flex h-10 w-10 items-center justify-center rounded-md text-white"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+        aria-label="Open menu"
+      >
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-nav-backdrop"
+  class="fixed inset-0 z-40 hidden bg-navy/40 backdrop-blur-sm md:hidden"
+  data-state="closed"
+></div>
+
+<div
+  id="mobile-nav-drawer"
+  class="fixed inset-y-0 right-0 z-50 hidden w-[86vw] max-w-sm translate-x-full overflow-y-auto bg-surface shadow-2xl transition-transform duration-300 ease-out md:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site menu"
+  data-state="closed"
+  style="padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);"
+>
+  <div class="flex items-center justify-between border-b border-border px-5 py-3.5">
+    <span class="text-sm font-semibold uppercase tracking-wide text-ink-soft">Menu</span>
+    <button
+      id="mobile-nav-close"
+      type="button"
+      class="flex h-10 w-10 items-center justify-center rounded-md text-ink"
+      aria-label="Close menu"
+    >
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+  <MobileNav items={nav} />
+</div>
+
+<script>
+  const toggle = document.getElementById("mobile-nav-toggle");
+  const closeBtn = document.getElementById("mobile-nav-close");
+  const drawer = document.getElementById("mobile-nav-drawer");
+  const backdrop = document.getElementById("mobile-nav-backdrop");
+
+  function openDrawer() {
+    if (!drawer || !backdrop || !toggle) return;
+    drawer.classList.remove("hidden");
+    backdrop.classList.remove("hidden");
+    requestAnimationFrame(() => {
+      drawer.classList.remove("translate-x-full");
+    });
+    drawer.dataset.state = "open";
+    backdrop.dataset.state = "open";
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDrawer() {
+    if (!drawer || !backdrop || !toggle) return;
+    drawer.classList.add("translate-x-full");
+    drawer.dataset.state = "closed";
+    backdrop.dataset.state = "closed";
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    window.setTimeout(() => {
+      if (drawer.dataset.state === "closed") {
+        drawer.classList.add("hidden");
+        backdrop.classList.add("hidden");
+      }
+    }, 300);
+  }
+
+  toggle?.addEventListener("click", openDrawer);
+  closeBtn?.addEventListener("click", closeDrawer);
+  backdrop?.addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && drawer?.dataset.state === "open") closeDrawer();
+  });
+
+  let lastScrollY = window.scrollY;
+  const header = document.getElementById("site-header");
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!header) return;
+      const scrolled = window.scrollY > 12;
+      header.classList.toggle("shadow-card-hover", scrolled);
+      lastScrollY = window.scrollY;
+    },
+    { passive: true }
+  );
+</script>

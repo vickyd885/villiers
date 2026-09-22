@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import Callout from "../../components/ui/Callout.astro";
+import { site } from "../../data/site";
+---
+
+<BaseLayout
+  title="Absence & Late Procedures"
+  description="How to report a pupil absence, our late arrival procedures, and penalty notice fines for unauthorised absence."
+>
+  <Hero compact title="My child is going to be absent or late" image="/images/campus/courtyard-respect-mural.jpg" imageAlt="Outdoor picnic courtyard" />
+  <Breadcrumbs items={[{ label: "Key Parental Information", href: "/key-information" }, { label: "Absence / Late" }]} />
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <SectionHeading title="Reporting an absence" />
+    <div class="prose-body mt-4 text-ink-soft">
+      <p>
+        Email <a href={`mailto:studentabsence@villiers.ealing.sch.uk`}>studentabsence@villiers.ealing.sch.uk</a>
+        {" "}before 8am on each day of absence, including your child's name, year, tutor group and the reason for
+        absence.
+      </p>
+    </div>
+
+    <div class="mt-10">
+      <SectionHeading title="Late arrival" />
+      <div class="prose-body mt-4 text-ink-soft">
+        <p>A pupil is late to school if they arrive after 8:30am.</p>
+      </div>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border border-border bg-surface p-5">
+          <p class="text-sm font-semibold uppercase tracking-wide text-navy-ink">8:30am – 9:00am</p>
+          <ul class="mt-2 space-y-1.5 text-sm text-ink-soft">
+            <li>Marked present with an 'L' code</li>
+            <li>One item confiscated, returned at same-day break detention</li>
+            <li>Parents receive a text notification</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-crimson/25 bg-crimson/5 p-5">
+          <p class="text-sm font-semibold uppercase tracking-wide text-crimson">After 9:00am</p>
+          <ul class="mt-2 space-y-1.5 text-sm text-ink">
+            <li>Registers close at 9am — pupil must sign in at reception</li>
+            <li>Marked with a 'U' code (morning attendance recorded as 0%)</li>
+            <li>Late detention assigned; may affect overall attendance record</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <SectionHeading title="Exceptional leave requests" />
+      <div class="prose-body mt-4 text-ink-soft">
+        <p>
+          There is no entitlement to 10 days' absence from school per academic year. Exceptional leave must be
+          requested via the {" "}
+          <a href="https://villierskighschool.formstack.com/workflows/parent_application_loa_v1" target="_blank" rel="noopener">
+            Application for Leave of Absence form
+          </a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <Callout variant="danger" title="Penalty notice fines">
+        <p>
+          If a pupil has <strong>5 or more days</strong> of unauthorised absence within a 10-week period, parents/carers
+          may be issued a penalty notice: <strong>£160</strong> per parent/carer, reduced to <strong>£80</strong> if
+          paid within 21 days. A second penalty within the period is £160 with no reduction. Non-payment after 28
+          days may result in prosecution.
+        </p>
+      </Callout>
+    </div>
+
+    <p class="prose-body mt-10 text-ink-soft">
+      Questions about attendance? Call our Attendance Officer on {" "}
+      <a href={`tel:${site.attendancePhone.replace(/\s/g, "")}`}>{site.attendancePhone}</a>.
+    </p>
+  </section>
+</BaseLayout>

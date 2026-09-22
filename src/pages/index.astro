@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/ui/Hero.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import StatBlock from "../components/ui/StatBlock.astro";
+import ValuesGrid from "../components/sections/ValuesGrid.astro";
+import CardGrid from "../components/ui/CardGrid.astro";
+import Card from "../components/ui/Card.astro";
+import CTA from "../components/ui/CTA.astro";
+import Callout from "../components/ui/Callout.astro";
+import { site } from "../data/site";
+import { url } from "../lib/url";
+
+const openEveningForm =
+  "https://forms.cloud.microsoft/pages/responsepage.aspx?id=XGUULhP24kKH_TsIm2KsehwspEIzcD1BuMKMqy1Sw_1UNDFBTlA3VUM2TkdYU01YOUlTVkE1VkFMRS4u&origin=QRCode&route=shorturl";
+
+const exploreCards = [
+  {
+    title: "Our School",
+    description: "Our vision and values, history, curriculum and what makes Villiers a special place to learn.",
+    href: "/our-school",
+    image: "/images/campus/reception-entrance.jpg",
+    imageAlt: "The school's modern reception building",
+  },
+  {
+    title: "Admissions",
+    description: "How to apply for a Year 7 place, in-year admissions, and our admissions policy.",
+    href: "/our-school/our-admissions",
+    image: "/images/campus/crest-stone-carving.jpg",
+    imageAlt: "Carved stone crest on the Grade II listed school building",
+  },
+  {
+    title: "Sixth Form",
+    description: "The highest-achieving sixth form in Ealing, and in the top 1% in England.",
+    href: "/our-sixth-form-1",
+    image: "/images/campus/sixth-form-centre-v6.jpg",
+    imageAlt: "Students in the V6 Sixth Form Centre",
+  },
+  {
+    title: "Key Parental Information",
+    description: "Term dates, the daily timetable, uniform, absence procedures and more.",
+    href: "/key-information",
+    image: "/images/campus/outdoor-picnic-shelters.jpg",
+    imageAlt: "Covered outdoor seating area on the school playground",
+  },
+];
+---
+
+<BaseLayout title={site.name} description={site.tagline}>
+  <Hero
+    eyebrow="Ofsted 'Outstanding' — 2019 & 2025"
+    title="Villiers High School"
+    subtitle={site.tagline}
+    image="/images/campus/listed-building-facade.jpg"
+    imageAlt="The Grade II listed Villiers High School building"
+    primaryCta={{ label: "Register: Year 6 Open Evening", href: openEveningForm }}
+    secondaryCta={{ label: "Explore Our School", href: "/our-school" }}
+  />
+
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <Callout variant="danger" title="Year 6 Open Evening — Thursday 1st October, 5:00pm – 7:00pm">
+      <p>Headteacher talks at 5:15pm and 6:15pm. We'd love to show prospective families around the school.</p>
+      <p class="mt-3">
+        <a href={openEveningForm} target="_blank" rel="noopener" class="font-semibold text-crimson underline">
+          Register here &rarr;
+        </a>
+      </p>
+    </Callout>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <StatBlock
+      stats={[
+        { value: "1907", label: "Founded as Southall County School" },
+        { value: "~1,500", label: "Pupils on roll" },
+        { value: "~180", label: "Teaching & support staff" },
+        { value: "~250", label: "Students in our Sixth Form" },
+      ]}
+    />
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <div>
+        <SectionHeading eyebrow="Welcome" title="Over a century at the heart of Southall" />
+        <div class="prose-body mt-5 text-ink-soft">
+          <p>
+            Villiers High School, or Southall County School as it was known in its inaugural year, has stood the
+            test of time. The school opened to its 54 pupils on 14th September 1907 under its first Headteacher,
+            Mr Sam Pollitt, in the then relatively new suburb of Southall. Over one hundred years later, under the
+            headship of Mr Christopher Richards, it continues to enjoy a reputation for success but is now fully
+            inclusive and serves a vastly different population of just under 1,500 pupils.
+          </p>
+          <p>
+            Our 150+ teaching and support staff do an excellent job of educating our pupils each year and, although
+            we are larger than the England average, we are smaller than many local high schools. This makes us the
+            right size to offer a full range of subjects taught by specialist teachers whilst retaining a small,
+            family-style supportive environment in which we get to know every child.
+          </p>
+          <p>
+            We are situated in the heart of Southall, just a short walk from the Elizabeth line and a stop on the
+            Superloop which connects us with the best that London can offer. We like to think of ourselves as the
+            beating heart of the community as we work closely with community partners and support and celebrate
+            our locality.
+          </p>
+          <p>
+            The majority of the school is housed in a beautiful Grade II listed building and, whilst honouring our
+            past, we have undertaken a comprehensive refurbishment plan to upgrade all classrooms and IT facilities.
+            Our newly refurbished school theatre allows us to perform at a very high standard, and we look forward
+            to the completion of our Eco building very soon — a state-of-the-art, carbon-neutral, three-storey
+            building with brand new Science and Computer Science laboratories, exhibition and conference space, and
+            an ecological garden.
+          </p>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-3xl shadow-card">
+        <img
+          src={url("/images/campus/courtyard-respect-mural.jpg")}
+          alt="Outdoor picnic courtyard with a student-painted 'Respect' mural"
+          class="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow="HEART"
+        title="Our values"
+        description="We expect to see these values in action in our pupils' and staff's daily lives, so our policies, procedures and approach in the classroom are honed to develop them every day."
+      />
+      <div class="mt-8">
+        <ValuesGrid />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <SectionHeading eyebrow="Explore" title="Find out more about Villiers" />
+    <div class="mt-8">
+      <CardGrid columns={4}>
+        {exploreCards.map((card) => <Card {...card} />)}
+      </CardGrid>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <CTA
+      title="It's always best to see the school in action"
+      description="We look forward to welcoming you soon — book a visit or get in touch with our admissions team."
+      primaryCta={{ label: "Request a visit", href: "/contact" }}
+      secondaryCta={{ label: "Call us: " + site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` }}
+    />
+  </section>
+</BaseLayout>

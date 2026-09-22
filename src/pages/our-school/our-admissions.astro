@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import Callout from "../../components/ui/Callout.astro";
+import DownloadLink from "../../components/ui/DownloadLink.astro";
+import CTA from "../../components/ui/CTA.astro";
+import { site } from "../../data/site";
+
+const whyChoose = [
+  "High expectations and ambitious learning for every pupil",
+  "A broad and engaging curriculum designed to prepare pupils for future study, employment and adult life",
+  "A strong commitment to inclusion, ensuring pupils receive the support they need to succeed",
+  "Extensive enrichment opportunities, including clubs, trips, residential experiences and pupil leadership",
+  "A strong programme of careers education and guidance",
+  "A welcoming and diverse school community where pupils are encouraged to develop confidence",
+  "Clear expectations for behaviour, attendance and achievement, supported by strong pastoral care",
+];
+---
+
+<BaseLayout
+  title="Admissions"
+  description="How to apply for a Year 7 place at Villiers High School, in-year admissions, and our admissions policy."
+>
+  <Hero
+    compact
+    title="Admissions"
+    subtitle="We want pupils not simply to attend Villiers, but to belong, participate and flourish."
+    image="/images/campus/crest-stone-carving.jpg"
+    imageAlt="Carved stone crest on the school building"
+  />
+  <Breadcrumbs items={[{ label: "Admissions" }]} />
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <p class="text-lg leading-relaxed text-ink-soft">
+      Villiers is a vibrant, diverse and inclusive school where we have high expectations for every pupil, guided
+      by our HEART values — Honesty, Equity, Aspiration, Respect and Tenacity.
+    </p>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading title="Why choose Villiers?" />
+      <ul class="mt-6 space-y-3">
+        {
+          whyChoose.map((point) => (
+            <li class="flex items-start gap-3 rounded-xl border border-border bg-surface p-4 text-sm leading-relaxed text-ink">
+              <svg class="mt-0.5 h-5 w-5 shrink-0 text-crimson" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {point}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+    <SectionHeading title="Year 7 entry — September 2027" />
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-2xl border border-border bg-surface p-5">
+        <p class="text-sm font-semibold uppercase tracking-wide text-crimson">Application deadline</p>
+        <p class="mt-1 text-2xl font-bold text-navy">31 October 2026</p>
+      </div>
+      <div class="rounded-2xl border border-border bg-surface p-5">
+        <p class="text-sm font-semibold uppercase tracking-wide text-crimson">National Offer Day</p>
+        <p class="mt-1 text-2xl font-bold text-navy">1 March 2027</p>
+      </div>
+    </div>
+    <p class="prose-body mt-6 text-ink-soft">
+      If you live in the London Borough of Ealing, apply via
+      {" "}<a href="https://www.ealing.gov.uk/info/201115/apply_for_high_school/2046/apply_for_a_high_school_place" target="_blank" rel="noopener">Ealing Council's secondary admissions process</a>.
+      If you live outside Ealing, apply through your home local authority's process.
+    </p>
+
+    <div class="mt-10">
+      <SectionHeading title="In-year admissions (Years 7–11)" />
+      <p class="prose-body mt-4 text-ink-soft">
+        Applications are submitted via
+        {" "}<a href="https://www.ealing.gov.uk/info/201116/in-year_admissions/2047/apply_for_an_in-year_high_school_place" target="_blank" rel="noopener">Ealing Council's in-year admissions portal</a>.
+        Places are offered according to availability and the school's published admissions arrangements.
+      </p>
+    </div>
+
+    <Callout variant="info" title="Ealing School Admissions" >
+      <p>Call <strong>020 8825 5511</strong> (9am–12pm) for help with the Ealing admissions process.</p>
+    </Callout>
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+      <DownloadLink href="/documents/admissions-policy.pdf" label="Admissions Policy" meta="PDF" />
+      <DownloadLink href="https://www.villiers.ealing.sch.uk/downloadfile/21334586" label="Leaver's Form" meta="External download" external />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <CTA
+      title="Questions about admissions?"
+      description="Our admissions team is happy to help with anything not covered here."
+      primaryCta={{ label: "Email admissions", href: `mailto:${site.admissionsEmail}` }}
+      secondaryCta={{ label: "Email general enquiries", href: `mailto:${site.email}` }}
+    />
+  </section>
+</BaseLayout>

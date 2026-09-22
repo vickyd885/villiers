@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+
+const timeline = [
+  { year: "1907", text: "Opens 14 September as Southall County School with 54 pupils, one of the first new county secondary schools built in Britain, under first Headteacher Mr Sam Pollitt." },
+  { year: "1945", text: "Renamed Southall Grammar." },
+  { year: "1963", text: "Merges with Southall College of Technology to become Southall Grammar Technical School." },
+  { year: "1975", text: "Becomes Villiers High School and goes fully comprehensive, ending entrance examinations for Year 7 admission." },
+  { year: "Today", text: "The longest-serving state school in the borough, housed in its original Grade II listed building alongside modern science, arts, drama, music and Sixth Form facilities." },
+];
+---
+
+<BaseLayout
+  title="History of Villiers"
+  description="From Southall County School in 1907 to Villiers High School today — the longest-serving state school in the borough."
+>
+  <Hero
+    compact
+    title="History of Villiers"
+    subtitle="The longest serving state school in the borough."
+    image="/images/campus/listed-building-facade.jpg"
+    imageAlt="The Grade II listed school building facade"
+  />
+  <Breadcrumbs items={[{ label: "Our School", href: "/our-school" }, { label: "History of Villiers" }]} />
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="prose-body text-ink-soft">
+      <p>
+        The school opened on 14th September 1907 as Southall County School, with 54 pupils — one of the first new
+        county secondary schools to be built in Britain. Its first Headteacher, Mr Sam Pollitt, was known for his
+        stern reputation, "steely blue eyes gazing intently over his bristling moustache."
+      </p>
+      <p>
+        Notable alumni include Lord Lionel Robbins, regarded as one of Britain's greatest 20th-century economists,
+        and actor Barry Foster, known for the 1970s television series <em>Van der Valk</em>.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading title="Over a century of change" align="center" />
+      <ol class="mt-10 space-y-6 border-l-2 border-border pl-6">
+        {
+          timeline.map((item) => (
+            <li class="relative">
+              <span class="absolute -left-[1.95rem] top-1 h-3.5 w-3.5 rounded-full border-2 border-crimson bg-surface" />
+              <p class="text-sm font-bold uppercase tracking-wide text-crimson">{item.year}</p>
+              <p class="mt-1 text-base leading-relaxed text-ink-soft">{item.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <SectionHeading title="Today's facilities" />
+    <div class="prose-body mt-4 text-ink-soft">
+      <p>
+        Alongside the school's resilient original buildings, Villiers has incorporated modern additions: science
+        and arts blocks, drama and music facilities, a business block, a newly constructed Sixth Form building
+        (V6), and an updated canteen — while a state-of-the-art, carbon-neutral Eco building is underway.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

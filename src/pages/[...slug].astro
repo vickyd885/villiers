@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import PlaceholderNotice from "../components/sections/PlaceholderNotice.astro";
+import { nav, flattenNav, type NavItem } from "../data/nav";
+
+export function getStaticPaths() {
+  const seen = new Set<string>();
+  const entries = flattenNav(nav).filter(({ item }) => {
+    if (item.inScope) return false;
+    if (item.external) return false;
+    if (!item.href.startsWith("/")) return false;
+    if (item.href === "/") return false;
+    if (seen.has(item.href)) return false;
+    seen.add(item.href);
+    return true;
+  });
+
+  return entries.map(({ item, parents }) => ({
+    params: { slug: item.href.replace(/^\//, "") },
+    props: { item, parents },
+  }));
+}
+
+interface Props {
+  item: NavItem;
+  parents: NavItem[];
+}
+
+const { item, parents } = Astro.props;
+const crumbs = [...parents.map((p) => ({ label: p.label, href: p.href })), { label: item.label }];
+---
+
+<BaseLayout title={item.label} description={`${item.label} — Villiers High School.`}>
+  <Breadcrumbs items={crumbs} />
+  <div class="mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-navy sm:text-4xl">{item.label}</h1>
+    <div class="mt-6">
+      <PlaceholderNotice liveHref={item.href} />
+    </div>
+  </div>
+</BaseLayout>

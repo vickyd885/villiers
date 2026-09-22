@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import ValuesGrid from "../../components/sections/ValuesGrid.astro";
+
+const britishValues = [
+  {
+    label: "Democracy",
+    description:
+      "Pupils learn about the UK's political system, Parliament and voting, and participate in citizenship through Year Councils and the School Council.",
+  },
+  {
+    label: "Rule of Law",
+    description: "Pupils learn that legal frameworks protect individual safety and wellbeing, and are expected to uphold school rules.",
+  },
+  {
+    label: "Individual Liberty",
+    description: "Pupils are taught about freedoms including free speech, free movement, and free assembly and worship.",
+  },
+  {
+    label: "Mutual Respect",
+    description: "Embedded through our pastoral programme and assemblies, promoting tolerance across different faith backgrounds.",
+  },
+  {
+    label: "Tolerance of Different Faiths & Beliefs",
+    description: "Through Religious Education, PSHE and assemblies, pupils develop understanding of diverse cultures and beliefs.",
+  },
+];
+---
+
+<BaseLayout
+  title="Vision & Values"
+  description="A world-class inclusive school at the beating heart of its community — our vision, motto, HEART values and British Values."
+>
+  <Hero
+    compact
+    title="Vision & Values"
+    subtitle="A world-class inclusive school at the beating heart of its community."
+    image="/images/campus/courtyard-respect-mural.jpg"
+    imageAlt="Courtyard with a student-painted 'Respect' mural"
+  />
+  <Breadcrumbs items={[{ label: "Our School", href: "/our-school" }, { label: "Vision & Values" }]} />
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <blockquote class="border-l-4 border-crimson bg-surface-card rounded-r-2xl py-6 pl-6 pr-4">
+      <p class="text-xl font-semibold italic text-navy">"For life, not school, we learn."</p>
+      <p class="mt-2 text-sm text-ink-soft">Our school motto</p>
+    </blockquote>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
+    <SectionHeading eyebrow="HEART" title="Our five core values" />
+    <div class="mt-8">
+      <ValuesGrid />
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        title="British Values"
+        description="These principles are embedded through SMSC programming, assemblies, Religious Education, PSHE, Citizenship, and active pupil participation in democratic structures and community service."
+      />
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {
+          britishValues.map((value) => (
+            <div class="rounded-2xl border border-border bg-surface p-5">
+              <p class="font-semibold text-navy">{value.label}</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-soft">{value.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

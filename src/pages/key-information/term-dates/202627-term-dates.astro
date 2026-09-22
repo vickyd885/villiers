@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/ui/Breadcrumbs.astro";
+import Hero from "../../../components/ui/Hero.astro";
+import Callout from "../../../components/ui/Callout.astro";
+
+const terms = [
+  {
+    name: "Autumn Term 2026",
+    rows: [
+      ["Term starts", "Tuesday 1 – Friday 4 September (staggered entry)"],
+      ["Half term", "Monday 26 – Friday 30 October"],
+      ["Occasional day", "Monday 30 November"],
+      ["Term ends", "Friday 18 December (12:30pm)"],
+      ["Christmas holiday", "Monday 21 December 2026 – Friday 1 January 2027"],
+    ],
+  },
+  {
+    name: "Spring Term 2027",
+    rows: [
+      ["Term starts", "Monday 4 January (8:30am)"],
+      ["Half term", "Monday 15 – Friday 19 February"],
+      ["Occasional day", "Wednesday 10 March"],
+      ["Term ends", "Thursday 25 March (12:30pm)"],
+      ["Easter holiday", "Friday 26 March – Friday 9 April"],
+    ],
+  },
+  {
+    name: "Summer Term 2027",
+    rows: [
+      ["Term starts", "Monday 12 April (pupils 8:30am)"],
+      ["May Day", "Monday 3 May"],
+      ["Half term", "Monday 31 May – Friday 4 June"],
+      ["Occasional day", "Monday 28 June"],
+      ["Term ends", "Tuesday 20 July (12:30pm)"],
+    ],
+  },
+];
+---
+
+<BaseLayout title="Term Dates 2026/27" description="Villiers High School term dates, half-terms and INSET days for the 2026/27 academic year.">
+  <Hero compact title="Term Dates 2026/27" image="/images/campus/listed-building-facade.jpg" imageAlt="The Grade II listed school building facade" />
+  <Breadcrumbs items={[{ label: "Key Parental Information", href: "/key-information" }, { label: "Term Dates" }]} />
+
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      {
+        terms.map((term) => (
+          <div class="overflow-hidden rounded-2xl border border-border">
+            <p class="bg-navy px-5 py-3 text-sm font-semibold text-white">{term.name}</p>
+            <table class="w-full text-sm">
+              <tbody>
+                {term.rows.map(([label, value], i) => (
+                  <tr class={i % 2 === 0 ? "bg-surface" : "bg-surface-alt"}>
+                    <th scope="row" class="w-40 px-5 py-3 text-left font-medium text-ink-soft">{label}</th>
+                    <td class="px-5 py-3 text-ink">{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-8">
+      <Callout variant="info" title="INSET & occasional days">
+        <p><strong>INSET days:</strong> 1 & 2 September 2026; 28 June 2027 (plus additional hours on 21 & 22 July 2027).</p>
+        <p class="mt-2"><strong>Occasional days:</strong> 30 November 2026; 10 March 2027; 26 July 2027.</p>
+        <p class="mt-2"><strong>Year 7s & 12s only:</strong> 2 September 2026.</p>
+      </Callout>
+    </div>
+  </section>
+</BaseLayout>

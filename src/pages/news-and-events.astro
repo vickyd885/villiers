@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import Hero from "../components/ui/Hero.astro";
+import CardGrid from "../components/ui/CardGrid.astro";
+import Card from "../components/ui/Card.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="News & Events"
+  description="Keep up to date with Villiers High School's weekly family bulletin and key term dates."
+>
+  <Hero
+    compact
+    title="News & Events"
+    subtitle="For a round-up of what's been happening most recently at school, read our family bulletin."
+    image="/images/campus/outdoor-picnic-shelters.jpg"
+    imageAlt="Covered outdoor seating area on the school playground"
+  />
+  <Breadcrumbs items={[{ label: "News & Events" }]} />
+
+  <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <p class="max-w-2xl text-lg leading-relaxed text-ink-soft">
+      Our family bulletin is shared with all of our families and governors every week — it's the best way to keep
+      up with what's happening at Villiers.
+    </p>
+
+    <div class="mt-10">
+      <CardGrid columns={3}>
+        <Card
+          title="Family Bulletin"
+          description="Our weekly round-up of news, events and reminders for families and governors."
+          href="https://villiershighschool.blog/"
+          external
+        />
+        <Card
+          title="Parents' Evenings & Reporting"
+          description="Dates and booking information for parents' evenings throughout the year."
+          href="/key-information/parents-evenings-reporting"
+        />
+        <Card
+          title="Term Dates"
+          description="Term and half-term dates, INSET days and holidays for 2026/27."
+          href="/key-information/term-dates/202627-term-dates"
+        />
+      </CardGrid>
+    </div>
+
+    <p class="prose-body mt-10 max-w-2xl text-ink-soft">
+      Not receiving the family bulletin? Email <a href={`mailto:${site.email}`}>{site.email}</a> and we'll get you
+      subscribed.
+    </p>
+  </section>
+</BaseLayout>

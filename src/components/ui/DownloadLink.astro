@@ -1,0 +1,33 @@
+---
+import { url } from "../../lib/url";
+
+interface Props {
+  href: string;
+  label: string;
+  meta?: string;
+  external?: boolean;
+}
+
+const { href, label, meta, external = false } = Astro.props;
+---
+
+<a
+  href={url(href)}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener" : undefined}
+  download={external ? undefined : true}
+  class="group flex items-center gap-3 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-navy-ink/30 hover:bg-surface-alt"
+>
+  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy/10 text-navy">
+    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 3v9m0 0l-3.5-3.5M10 12l3.5-3.5M4 15.5h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </span>
+  <span class="flex-1">
+    <span class="block text-sm font-semibold text-ink">{label}</span>
+    {meta && <span class="block text-xs text-ink-soft">{meta}</span>}
+  </span>
+  <svg class="h-4 w-4 text-ink-soft transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</a>

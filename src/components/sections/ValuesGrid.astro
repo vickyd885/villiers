@@ -1,0 +1,33 @@
+---
+import { site } from "../../data/site";
+
+interface Value {
+  label: string;
+  description?: string;
+}
+
+interface Props {
+  values?: Value[];
+}
+
+const descriptions: Record<string, string> = {
+  Honesty: "Acting with integrity in how we speak, work and treat one another.",
+  Equity: "Making sure every pupil gets the support they need to succeed.",
+  Aspiration: "High expectations for every pupil, whatever their starting point.",
+  Respect: "Valuing our diverse community and treating others as we'd want to be treated.",
+  Tenacity: "Persisting through challenge, in the classroom and beyond it.",
+};
+
+const { values = site.values.map((v) => ({ label: v.label, description: descriptions[v.label] })) } = Astro.props;
+---
+
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+  {
+    values.map((value) => (
+      <div class="rounded-2xl border border-border bg-surface-card p-5 text-center">
+        <p class="text-base font-bold text-navy">{value.label}</p>
+        {value.description && <p class="mt-2 text-xs leading-relaxed text-ink-soft">{value.description}</p>}
+      </div>
+    ))
+  }
+</div>

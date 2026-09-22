@@ -1,0 +1,95 @@
+---
+import type { NavItem } from "../../data/nav";
+import { site } from "../../data/site";
+import { url } from "../../lib/url";
+
+interface Props {
+  items: NavItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Mobile">
+  <ul class="flex flex-col divide-y divide-border">
+    {
+      items.map((item) => (
+        <li>
+          {item.children ? (
+            <details class="group/d1">
+              <summary class="flex cursor-pointer list-none items-center justify-between px-5 py-3.5 text-base font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden">
+                <span>{item.label}</span>
+                <svg class="h-4 w-4 shrink-0 text-ink-soft transition-transform duration-200 group-open/d1:rotate-180" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <ul class="bg-surface-alt pb-1">
+                {item.children.map((child) => (
+                  <li>
+                    {child.children ? (
+                      <details class="group/d2">
+                        <summary class="flex cursor-pointer list-none items-center justify-between px-7 py-2.5 text-sm font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden">
+                          <span>{child.label}</span>
+                          <svg class="h-3.5 w-3.5 shrink-0 text-ink-soft transition-transform duration-200 group-open/d2:rotate-180" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </summary>
+                        <ul class="pb-1">
+                          {child.children.map((grandchild) => (
+                            <li>
+                              <a
+                                href={url(grandchild.href)}
+                                target={grandchild.external ? "_blank" : undefined}
+                                rel={grandchild.external ? "noopener" : undefined}
+                                class="block px-9 py-2 text-sm text-ink-soft hover:text-ink"
+                              >
+                                {grandchild.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    ) : (
+                      <a
+                        href={url(child.href)}
+                        target={child.external ? "_blank" : undefined}
+                        rel={child.external ? "noopener" : undefined}
+                        class="block px-7 py-2.5 text-sm text-ink-soft hover:text-ink"
+                      >
+                        {child.label}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <a
+              href={url(item.href)}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener" : undefined}
+              class="block px-5 py-3.5 text-base font-medium text-ink"
+            >
+              {item.label}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="flex flex-col gap-2 border-t border-border p-5">
+    <a
+      href={`tel:${site.phone.replace(/\s/g, "")}`}
+      class="flex items-center justify-center gap-2 rounded-lg bg-navy px-4 py-3 text-sm font-semibold text-white"
+    >
+      Call the school office
+    </a>
+    <a
+      href={`mailto:${site.email}`}
+      class="flex items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-semibold text-ink"
+    >
+      Email the school
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import CardGrid from "../../components/ui/CardGrid.astro";
+import Card from "../../components/ui/Card.astro";
+import { url } from "../../lib/url";
+
+const builtCards = [
+  { title: "Term Dates 2026/27", description: "Autumn, Spring and Summer term dates, half-terms and INSET days.", href: "/key-information/term-dates/202627-term-dates" },
+  { title: "Times of the Day", description: "Our daily timetable, including breakfast club, lessons, lunch and Thursday's earlier finish.", href: "/key-information/times-of-the-day" },
+  { title: "Absence & Late Procedures", description: "How to report an absence, our late codes, and penalty notice fines.", href: "/key-information/my-child-is-going-to-be-absentlate" },
+  { title: "Uniform", description: "Our expectations for school uniform and where to find the full policy.", href: "/key-information/uniform" },
+];
+
+const moreLinks = [
+  { title: "Who is my child's HoY?", href: "/key-information/hoys" },
+  { title: "Notice Boards", href: "/key-information/year-group-notice-boards" },
+  { title: "Admissions", href: "/our-school/our-admissions" },
+  { title: "Parents' Evenings & Reporting", href: "/key-information/parents-evenings-reporting" },
+  { title: "Extra Curricular Activities", href: "/key-information/our-enrichment-and-extra-curricular" },
+  { title: "GCSE Options", href: "/key-information/gcse-options" },
+  { title: "Parent Info Booklets", href: "/key-information/parent-info-booklets" },
+  { title: "Family & Community Support", href: "/key-information/family-and-community-support" },
+  { title: "Primary Transitions Year 6 into 7", href: "/key-information/primary-transitions-year-6-into-7" },
+];
+---
+
+<BaseLayout
+  title="Key Parental Information"
+  description="Term dates, the daily timetable, uniform, absence procedures and everything else parents need to know."
+>
+  <Hero
+    compact
+    title="Key Parental Information"
+    subtitle="Everything you need to know, in one place."
+    image="/images/campus/outdoor-picnic-shelters.jpg"
+    imageAlt="Covered outdoor seating area on the school playground"
+  />
+  <Breadcrumbs items={[{ label: "Key Parental Information" }]} />
+
+  <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <CardGrid columns={4}>
+      {builtCards.map((card) => <Card {...card} />)}
+    </CardGrid>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading title="More key information" />
+      <ul class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {
+          moreLinks.map((link) => (
+            <li>
+              <a
+                href={url(link.href)}
+                class="block rounded-xl border border-border bg-surface px-4 py-3.5 text-sm font-medium text-navy shadow-card transition-colors hover:bg-surface-card"
+              >
+                {link.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

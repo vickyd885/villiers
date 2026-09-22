@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import StatBlock from "../../components/ui/StatBlock.astro";
+import CardGrid from "../../components/ui/CardGrid.astro";
+import Card from "../../components/ui/Card.astro";
+import { url } from "../../lib/url";
+
+const builtCards = [
+  {
+    title: "Vision & Values",
+    description: "Our vision, motto, HEART values and how we embed British Values across school life.",
+    href: "/our-school/our-vision-values",
+    image: "/images/campus/courtyard-respect-mural.jpg",
+    imageAlt: "Courtyard with student-painted 'Respect' mural",
+  },
+  {
+    title: "History of Villiers",
+    description: "From Southall County School in 1907 to Villiers High School today.",
+    href: "/our-school/history-of-villiers",
+    image: "/images/campus/listed-building-facade.jpg",
+    imageAlt: "The Grade II listed school building facade",
+  },
+  {
+    title: "Gallery",
+    description: "Photos and 360° virtual tours of our facilities, from the Sixth Form Centre to the Main Hall.",
+    href: "/our-school/gallery",
+    image: "/images/campus/gymnasium.jpg",
+    imageAlt: "The school gymnasium",
+  },
+];
+
+const moreCards = [
+  { title: "Sustainability", href: "/our-school/sustainability" },
+  { title: "Curriculum", href: "/our-school/curriculum-1" },
+  { title: "Results", href: "/our-school/our-results" },
+  { title: "Inclusion", href: "/our-school/inclusion" },
+  { title: "Library", href: "/our-school/our-library" },
+  { title: "Catering", href: "/our-school/catering" },
+  { title: "Global Citizens", href: "/our-school/global-citizens-1" },
+  { title: "Alumni", href: "/our-school/alumini" },
+];
+---
+
+<BaseLayout
+  title="Our School"
+  description="Villiers High School is a highly successful, 11-19 co-educational school in Southall, Ealing."
+>
+  <Hero
+    compact
+    title="Our School"
+    subtitle="A highly successful, 11-19 co-educational school with students from a variety of religions, faiths and countries."
+    image="/images/campus/reception-entrance.jpg"
+    imageAlt="The school's modern reception building"
+  />
+  <Breadcrumbs items={[{ label: "Our School" }]} />
+
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <StatBlock
+      stats={[
+        { value: "~1,500", label: "Pupils, ages 11-19" },
+        { value: "~180", label: "Teaching & support staff" },
+        { value: "~250", label: "Sixth Form students" },
+        { value: "Outstanding", label: "Ofsted, 2019 & 2025" },
+      ]}
+    />
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-6 sm:px-6 lg:px-8">
+    <div class="prose-body max-w-3xl text-ink-soft">
+      <p>
+        Visitors regularly note the warmth of welcome, harmonious atmosphere around the school and the focused
+        attitude of pupils. We're large enough to offer a full range of academic and vocational subjects — including
+        Level 3 and 2 qualifications, A/AS levels, and BTEC Triple, Double and Single awards — taught by specialist
+        teachers, while staying small enough to retain a friendly, family-style atmosphere. All of our students
+        leave with sound qualifications.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <SectionHeading title="Explore Our School" />
+    <div class="mt-8">
+      <CardGrid columns={3}>
+        {builtCards.map((card) => <Card {...card} />)}
+      </CardGrid>
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading title="More about Our School" />
+      <ul class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {
+          moreCards.map((card) => (
+            <li>
+              <a
+                href={url(card.href)}
+                class="block rounded-xl border border-border bg-surface px-4 py-3.5 text-sm font-medium text-navy shadow-card transition-colors hover:bg-surface-card"
+              >
+                {card.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "@fontsource-variable/work-sans";
+
+@theme {
+  /* Brand palette, sourced from the live Villiers High School site's CSS/logo */
+  --color-navy: #132460;
+  --color-navy-ink: #0a3e75;
+  --color-navy-tint: #465aa0;
+  --color-crimson: #910808;
+  --color-crimson-deep: #5b0e00;
+  --color-crimson-tint: #b8362f;
+  --color-ink: #191c2e;
+  --color-ink-soft: #4a4d5e;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f6f7fb;
+  --color-surface-card: #f0f1f8;
+  --color-border: #e2e4ef;
+
+  --font-sans: "Work Sans Variable", "Work Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(19, 36, 96, 0.06), 0 8px 24px -12px rgba(19, 36, 96, 0.18);
+  --shadow-card-hover: 0 4px 8px rgba(19, 36, 96, 0.08), 0 16px 32px -12px rgba(19, 36, 96, 0.24);
+
+  --animate-fade-in: fade-in 0.4s ease-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.prose-body :where(p) {
+  margin-bottom: 1.1em;
+  line-height: 1.75;
+}
+
+.prose-body :where(a) {
+  color: var(--color-navy-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+}
+
+.prose-body :where(a:hover) {
+  text-decoration-color: currentColor;
+}
+
+/* Visible focus ring everywhere for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-navy);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.5rem 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}

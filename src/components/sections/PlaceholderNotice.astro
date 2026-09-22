@@ -1,0 +1,28 @@
+---
+import Callout from "../ui/Callout.astro";
+import { site } from "../../data/site";
+
+interface Props {
+  liveHref: string;
+}
+
+const { liveHref } = Astro.props;
+const liveUrl = `https://www.villiers.ealing.sch.uk${liveHref}`;
+---
+
+<Callout variant="info" title="This page is being migrated to our new site">
+  <p>
+    We're rebuilding the Villiers High School website in stages, and this section hasn't been rebuilt yet. In the
+    meantime you can view the current version of this page on our existing site, or get in touch and we'll help
+    directly.
+  </p>
+  <p class="mt-3 flex flex-wrap gap-3">
+    <a href={liveUrl} target="_blank" rel="noopener" class="font-semibold text-navy-ink underline">
+      View this page on our current site &rarr;
+    </a>
+  </p>
+  <p class="mt-3">
+    Or contact the school office on <a href={`tel:${site.phone.replace(/\s/g, "")}`} class="font-semibold text-navy-ink underline">{site.phone}</a>
+    {" "}or <a href={`mailto:${site.email}`} class="font-semibold text-navy-ink underline">{site.email}</a>.
+  </p>
+</Callout>

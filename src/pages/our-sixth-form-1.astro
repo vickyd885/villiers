@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import Hero from "../components/ui/Hero.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import StatBlock from "../components/ui/StatBlock.astro";
+import DownloadLink from "../components/ui/DownloadLink.astro";
+import CTA from "../components/ui/CTA.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Sixth Form"
+  description="Villiers High School is the highest achieving sixth form in Ealing and in the top 1% in England."
+>
+  <Hero
+    eyebrow="Top 1% in England"
+    title="Sixth Form"
+    subtitle="Villiers High School is the highest achieving sixth form in Ealing, and in the top 1% in England."
+    image="/images/campus/sixth-form-centre-v6.jpg"
+    imageAlt="Students in the V6 Sixth Form Centre"
+    primaryCta={{ label: "Enrol online", href: "https://forms.gle/X1rg82iwzDT52CTv6" }}
+  />
+  <Breadcrumbs items={[{ label: "Sixth Form" }]} />
+
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <StatBlock
+      stats={[
+        { value: "Top 1%", label: "Sixth forms in England" },
+        { value: "#1", label: "Highest achieving in Ealing" },
+        { value: "~250", label: "Sixth Form students" },
+        { value: "A-Level & BTEC", label: "Qualification routes" },
+      ]}
+    />
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 pb-14 sm:px-6 lg:px-8">
+    <div class="prose-body text-ink-soft">
+      <p>
+        Our Sixth Form combines academic excellence through A-Levels and BTEC qualifications with a strong
+        enrichment programme. We aim for universal success in university and apprenticeship placements, and take
+        particular pride in our Russell Group university admissions rate. The Sixth Form is a pathway to further
+        and higher education, and forms the foundation for lifelong learning — built on the same community values,
+        equality and inclusion that run through the whole school.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading title="Enrolment" />
+      <div class="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <p class="text-sm font-semibold uppercase tracking-wide text-crimson">Enrolment date</p>
+        <p class="mt-1 text-2xl font-bold text-navy">Thursday 20 August 2026</p>
+        <p class="prose-body mt-3 text-ink-soft">
+          Complete the online form to receive your appointment confirmation.
+        </p>
+        <a
+          href="https://forms.gle/X1rg82iwzDT52CTv6"
+          target="_blank"
+          rel="noopener"
+          class="mt-4 inline-flex items-center justify-center rounded-lg bg-crimson px-5 py-3 text-sm font-semibold text-white shadow-card transition-colors hover:bg-crimson-deep"
+        >
+          Complete enrolment form
+        </a>
+      </div>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <DownloadLink href="/documents/sixth-form-bursary-policy.pdf" label="Sixth Form Bursary Policy" meta="PDF" />
+        <DownloadLink
+          href="https://www.villiers.ealing.sch.uk/downloadfile/19802790"
+          label="Year 13 Parent Information Booklet"
+          meta="External download — large PDF"
+          external
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <CTA
+      title="Have a question about Sixth Form admissions?"
+      primaryCta={{ label: "Email Sixth Form admissions", href: `mailto:${site.sixthFormEmail}` }}
+      secondaryCta={{ label: "Call the school office", href: `tel:${site.phone.replace(/\s/g, "")}` }}
+    />
+  </section>
+</BaseLayout>

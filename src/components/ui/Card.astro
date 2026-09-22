@@ -1,0 +1,42 @@
+---
+import { url } from "../../lib/url";
+
+interface Props {
+  title: string;
+  description?: string;
+  href: string;
+  image?: string;
+  imageAlt?: string;
+  external?: boolean;
+}
+
+const { title, description, href, image, imageAlt = "", external = false } = Astro.props;
+---
+
+<a
+  href={url(href)}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener" : undefined}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+>
+  {image && (
+    <div class="aspect-[16/10] w-full overflow-hidden">
+      <img
+        src={url(image)}
+        alt={imageAlt}
+        loading="lazy"
+        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    </div>
+  )}
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="text-base font-semibold text-navy">{title}</h3>
+    {description && <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{description}</p>}
+    <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-crimson">
+      {external ? "Visit" : "Learn more"}
+      <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+  </div>
+</a>

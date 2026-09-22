@@ -1,0 +1,90 @@
+---
+import { site } from "../../data/site";
+import { url } from "../../lib/url";
+
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  { label: "Admissions", href: "/our-school/our-admissions" },
+  { label: "Term Dates", href: "/key-information/term-dates/202627-term-dates" },
+  { label: "Uniform", href: "/key-information/uniform" },
+  { label: "Sixth Form", href: "/our-sixth-form-1" },
+  { label: "News & Events", href: "/news-and-events" },
+  { label: "Contact", href: "/contact" },
+];
+---
+
+<footer class="bg-navy text-white/90" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <img src={url("/images/site/logo.png")} alt="Villiers High School" width="150" height="40" class="h-9 w-auto" />
+        <p class="mt-4 max-w-xs text-sm leading-relaxed text-white/70">{site.tagline}</p>
+        <div class="mt-5 flex items-center gap-3">
+          <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-crimson">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.8h2.6l.4-3h-3V8.2c0-.9.25-1.5 1.55-1.5H16.6V4.1C16.3 4.06 15.3 4 14.1 4c-2.4 0-4 1.46-4 4.15v2.05H7.5v3h2.6V21h3.4Z"/></svg>
+          </a>
+          <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-crimson">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.9" cy="7.1" r="0.9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href={site.social.tiktok} target="_blank" rel="noopener" aria-label="TikTok" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-crimson">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.7 3h-3v12.2a2.6 2.6 0 1 1-1.9-2.5v-3.1a5.7 5.7 0 1 0 4.9 5.6V9.3a6.9 6.9 0 0 0 4 1.3V7.6a3.9 3.9 0 0 1-4-4.1Z"/></svg>
+          </a>
+          <a href={site.social.x} target="_blank" rel="noopener" aria-label="X (Twitter)" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-crimson">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4l7.2 9.6L4.4 20H6.6l5.8-5.6L17 20h3l-7.5-10L19.7 4h-2.2l-5.4 5.2L8.6 4H4Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-white">Quick links</h2>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/70">
+          {quickLinks.map((link) => (
+            <li><a href={url(link.href)} class="transition-colors hover:text-white">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-white">Get in touch</h2>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/70">
+          <li>{site.address.line1}, {site.address.line2}</li>
+          <li>{site.address.county}, {site.address.postcode}</li>
+          <li><a href={`tel:${site.phone.replace(/\s/g, "")}`} class="transition-colors hover:text-white">{site.phone}</a></li>
+          <li><a href={`mailto:${site.email}`} class="transition-colors hover:text-white">{site.email}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-white">Our values</h2>
+        <ul class="mt-4 flex flex-wrap gap-2 text-xs font-medium">
+          {site.values.map((v) => (
+            <li class="rounded-full bg-white/10 px-3 py-1.5">{v.label}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 border-t border-white/10 pt-8">
+      <p class="mb-4 text-center text-xs font-semibold uppercase tracking-wide text-white/50">Recognised &amp; accredited</p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <img
+            src={url(`/images/awards/award-${String(i + 1).padStart(2, "0")}.jpg`)}
+            alt=""
+            loading="lazy"
+            class="h-12 w-auto rounded bg-white/95 p-1 sm:h-14"
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row">
+      <p>&copy; {year} Villiers High School.</p>
+      <div class="flex gap-4">
+        <a href={url("/statutory-information")} class="hover:text-white/80">Statutory Information</a>
+        <a href={url("/contact")} class="hover:text-white/80">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>

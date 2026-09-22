@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import { url } from "../../lib/url";
+
+const photos = [
+  { src: "/images/campus/listed-building-facade.jpg", alt: "The Grade II listed school building facade" },
+  { src: "/images/campus/reception-entrance.jpg", alt: "The school's modern reception building" },
+  { src: "/images/campus/courtyard-respect-mural.jpg", alt: "Courtyard with a student-painted 'Respect' mural" },
+  { src: "/images/campus/gymnasium.jpg", alt: "Indoor gymnasium with basketball hoop" },
+  { src: "/images/campus/outdoor-picnic-shelters.jpg", alt: "Covered outdoor seating and table-tennis area" },
+  { src: "/images/campus/sixth-form-centre-v6.jpg", alt: "Seating area inside the V6 Sixth Form Centre" },
+  { src: "/images/campus/crest-stone-carving.jpg", alt: "Carved stone crest on the school building" },
+];
+
+const virtualTours = [
+  { label: "Main Hall", src: "https://kuula.co/share/collection/7kV7D?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Sixth Form Centre", src: "https://kuula.co/share/collection/7kVp0?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Canteen Serving Area", src: "https://kuula.co/share/collection/7kVmg?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Coco Cafe", src: "https://kuula.co/share/NG61F?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Playground", src: "https://kuula.co/share/collection/7kVmt?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Gymnasium", src: "https://kuula.co/share/collection/7kVmW?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Sixth Form Hub", src: "https://kuula.co/share/collection/7kVpY?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Canteen Seating Area", src: "https://kuula.co/share/collection/7kVmS?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+  { label: "Classroom", src: "https://kuula.co/share/collection/7kVmy?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&wmode=opaque" },
+];
+---
+
+<BaseLayout title="Gallery" description="Photos and 360° virtual tours of the Villiers High School campus and facilities.">
+  <Hero
+    compact
+    title="Gallery"
+    subtitle="A look around our campus and facilities."
+    image="/images/campus/gymnasium.jpg"
+    imageAlt="The school gymnasium"
+  />
+  <Breadcrumbs items={[{ label: "Our School", href: "/our-school" }, { label: "Gallery" }]} />
+
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <SectionHeading title="Photos" />
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        photos.map((photo) => (
+          <a href={url(photo.src)} target="_blank" rel="noopener" class="group block overflow-hidden rounded-xl border border-border">
+            <img
+              src={url(photo.src)}
+              alt={photo.alt}
+              loading="lazy"
+              class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading title="Take a 360° virtual tour" description="Explore our facilities interactively, room by room." />
+      <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        {
+          virtualTours.map((tour) => (
+            <div class="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+              <p class="border-b border-border px-4 py-3 text-sm font-semibold text-navy">{tour.label}</p>
+              <div class="aspect-video w-full">
+                <iframe
+                  src={tour.src}
+                  title={`360 tour: ${tour.label}`}
+                  loading="lazy"
+                  class="h-full w-full border-0"
+                  allow="xr-spatial-tracking; gyroscope; accelerometer"
+                  allowfullscreen
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

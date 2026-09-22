@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import Hero from "../components/ui/Hero.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import Callout from "../components/ui/Callout.astro";
+import { site } from "../data/site";
+
+const contacts = [
+  { role: "General enquiries", email: site.email },
+  { role: "Admissions", email: site.admissionsEmail },
+  { role: "Data Protection Officer (Ian Serrao)", email: site.dpoEmail },
+  { role: "SENCo (Trevor Murphy)", email: "tmurphy@villiers.ealing.sch.uk" },
+  { role: "Sixth Form Administrator (S Boliya)", email: "sboliya@villiers.ealing.sch.uk" },
+  { role: "Student References", email: "studentreferences@villiers.ealing.sch.uk" },
+];
+---
+
+<BaseLayout title="Contact" description="Contact details, address, phone numbers and email addresses for Villiers High School.">
+  <Hero
+    compact
+    title="Contact Us"
+    subtitle="We're happy to help — here's how to reach the right person."
+    image="/images/campus/courtyard-respect-mural.jpg"
+    imageAlt="Outdoor picnic courtyard with a student-painted 'Respect' mural"
+  />
+  <Breadcrumbs items={[{ label: "Contact" }]} />
+
+  <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <SectionHeading title="Visit or write to us" />
+        <div class="mt-6 space-y-4">
+          <div class="rounded-2xl border border-border bg-surface p-5">
+            <p class="text-sm font-semibold uppercase tracking-wide text-crimson">Address</p>
+            <p class="mt-1 text-base text-ink">
+              {site.name}<br />
+              {site.address.line1}, {site.address.line2}<br />
+              {site.address.county}, {site.address.postcode}
+            </p>
+            <a
+              href="https://maps.app.goo.gl/7jqqrPcdH2qDEf6YA"
+              target="_blank"
+              rel="noopener"
+              class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-navy-ink underline"
+            >
+              Get directions &rarr;
+            </a>
+          </div>
+          <div class="rounded-2xl border border-border bg-surface p-5">
+            <p class="text-sm font-semibold uppercase tracking-wide text-crimson">Phone</p>
+            <p class="mt-1 text-base text-ink">
+              School office: <a href={`tel:${site.phone.replace(/\s/g, "")}`} class="font-semibold text-navy-ink underline">{site.phone}</a><br />
+              Attendance Officer: <a href={`tel:${site.attendancePhone.replace(/\s/g, "")}`} class="font-semibold text-navy-ink underline">{site.attendancePhone}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <SectionHeading title="Email the right team" />
+        <ul class="mt-6 space-y-3">
+          {
+            contacts.map((c) => (
+              <li class="flex flex-col gap-0.5 rounded-xl border border-border bg-surface p-4 sm:flex-row sm:items-center sm:justify-between">
+                <span class="text-sm font-medium text-ink">{c.role}</span>
+                <a href={`mailto:${c.email}`} class="text-sm font-semibold text-navy-ink underline">{c.email}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 max-w-3xl">
+      <Callout variant="info" title="Who should I contact first?">
+        <p>
+          For most queries, please start with your child's Head of Year or the relevant Head of Department. If your
+          query isn't resolved, it will be escalated to an Assistant Headteacher, then a Deputy Headteacher, and
+          finally the Headteacher.
+        </p>
+      </Callout>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
+import Hero from "../../components/ui/Hero.astro";
+import DownloadLink from "../../components/ui/DownloadLink.astro";
+---
+
+<BaseLayout title="Uniform" description="Our expectations for school uniform at Villiers High School, and the full uniform policy.">
+  <Hero compact title="Our Uniform" image="/images/campus/reception-entrance.jpg" imageAlt="The school's modern reception building" />
+  <Breadcrumbs items={[{ label: "Key Parental Information", href: "/key-information" }, { label: "Uniform" }]} />
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="prose-body text-ink-soft">
+      <p>
+        The school expects all students to wear the uniform with pride on their way to and from school and on the
+        school site. We appreciate parental support in encouraging the highest standards of personal appearance.
+      </p>
+    </div>
+
+    <div class="mt-8">
+      <DownloadLink href="/documents/uniform-policy.pdf" label="Full Uniform Policy" meta="PDF — dress code requirements" />
+    </div>
+  </section>
+</BaseLayout>
